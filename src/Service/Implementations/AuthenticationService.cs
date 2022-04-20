@@ -1,0 +1,136 @@
+﻿using Data;
+using Data.Contracts;
+using Data.Entities;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using Service.Contracts;
+using Service.Models;
+using Service.Models.Requests;
+using Service.Models.Responses;
+using Service.Utils.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+
+namespace Service.Implementations;
+
+public class AuthenticationService : IAuthenticationService
+{
+    private readonly IRepository _repository;
+    private readonly JWTSettings _jwtSettings;
+
+    public AuthenticationService(IRepository repository, IOptions<JWTSettings> jwtSettings)
+    {
+        _repository = repository;
+        _jwtSettings = jwtSettings.Value;
+    }
+
+    public async Task<ServiceResponse<AuthenticationResponseModel>> Register(AuthenticationRequestModel model)
+    {
+        ArgumentNullException.ThrowIfNull(nameof(model));
+
+        string passwordHash = BCrypt.Net.BCrypt.HashPassword(model.Password);
+
+        var profile = new Profile()
+        {
+            UserName = model.UserName,
+            Password = passwordHash
+        };
+
+        var existingProfile = await _repository.GetProfileByUserNameAsync(model.UserName);
+
+        if (existingProfile != null)
+        {
+            return new()
+            {
+                Error = ErrorMessages.UserAlreadyExists
+            };
+        }
+
+        var createdProfile = await _repository.CreateProfileAsync(profile);
+
+        if (createdProfile == null)
+        {
+            return new()
+            {
+                Error = ErrorMessages.OperationHasFailed
+            };
+        }
+
+        return await GenerateTokenAsync(createdProfile);
+    }
+
+    public async Task<ServiceResponse<AuthenticationResponseModel>> Login(AuthenticationRequestModel model)
+    {
+        ArgumentNullException.ThrowIfNull(nameof(model));
+
+        var profile = await _repository.GetProfileByUserNameAsync(model.UserName);
+
+        if (profile == null)
+        {
+            return new()
+            {
+                Error = ErrorMessages.UserNotFound
+            };
+        }
+
+        string passwordHash = BCrypt.Net.BCrypt.HashPassword(model.Password);
+
+        bool isVerified = BCrypt.Net.BCrypt.Verify(model.Password, passwordHash);
+
+        if (!isVerified)
+        {
+            return new()
+            {
+                Error = ErrorMessages.WrongPassword
+            };
+        }
+
+        return await GenerateTokenAsync(profile);
+    }
+
+    #region Helper
+
+    private async Task<ServiceResponse<AuthenticationResponseModel>> GenerateTokenAsync(Profile user)
+    {
+        var token = GenerateJwtToken(user);
+
+        var response = new AuthenticationResponseModel()
+        {
+            AccessToken = token,
+            AccessTokenExpireDate = _jwtSettings.AccessExpireDate,
+        };
+
+        return new()
+        {
+            IsSuccessful = true,
+            Response = response
+        };
+    }
+
+    private string GenerateJwtToken(Profile user)
+    {
+        var claims = new List<Claim>()
+        {
+            new Claim(ClaimTypes.SerialNumber, user.Id.ToString())
+        };
+
+        if (!string.IsNullOrEmpty(user.UserName))
+        {
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.UserName));
+        }
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = Encoding.ASCII.GetBytes(_jwtSettings.SecretKey);
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(claims),
+            Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.AccessExpireDate),
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+        };
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
+    }
+
+    #endregion Helper
+}
