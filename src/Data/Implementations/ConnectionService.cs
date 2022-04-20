@@ -1,5 +1,6 @@
 ﻿using Data.Contracts;
-using Microsoft.Extensions.Configuration;
+using Data.Utils.Models;
+using Microsoft.Extensions.Options;
 using Npgsql;
 using System.Data;
 
@@ -7,12 +8,12 @@ namespace Data.Implementations;
 
 public class ConnectionService : IConnectionService
 {
-    private readonly string _connectionString;
+    private readonly ConnectionStrings _connectionStrings;
     private IDbConnection _dbConnection;
 
-    public ConnectionService(IConfiguration configuration)
+    public ConnectionService(IOptions<ConnectionStrings> connectionStrings)
     {
-        _connectionString = configuration.GetConnectionString("PostgresContext");
+        _connectionStrings = connectionStrings.Value;
     }
 
     public IDbConnection GetPostgresConnection()
@@ -22,7 +23,7 @@ public class ConnectionService : IConnectionService
             return _dbConnection;
         }
 
-        _dbConnection = new NpgsqlConnection(_connectionString);
+        _dbConnection = new NpgsqlConnection(_connectionStrings.PostgresContext);
         _dbConnection.Open();
         return _dbConnection;
     }
