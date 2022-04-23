@@ -2,7 +2,7 @@
 
 public class ResponseModel
 {
-    public static ResponseModel Success(object response)
+    public static ResponseModel Success(object response = null)
     {
         return new ResponseModel()
         {
