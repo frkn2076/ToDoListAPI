@@ -1,7 +1,8 @@
 CREATE TABLE IF NOT EXISTS profile (
     id serial PRIMARY KEY,
     username VARCHAR (20) UNIQUE NOT NULL,
-    password VARCHAR (100) NOT NULL
+    password VARCHAR (100) NOT NULL,
+    timezone NUMERIC (2) NULL
 );
 
 CREATE TABLE IF NOT EXISTS list (
