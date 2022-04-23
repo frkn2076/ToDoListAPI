@@ -27,7 +27,7 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<ServiceResponse<AuthenticationResponseModel>> Register(AuthenticationRequestDTO model)
     {
-        ArgumentNullException.ThrowIfNull(nameof(model));
+        ArgumentNullException.ThrowIfNull(model);
 
         string passwordHash = BCrypt.Net.BCrypt.HashPassword(model.Password);
 
@@ -101,18 +101,15 @@ public class AuthenticationService : IAuthenticationService
             AccessTokenExpireDate = _jwtSettings.AccessExpireDate,
         };
 
-        return new()
-        {
-            IsSuccessful = true,
-            Response = response
-        };
+        return ServiceResponse<AuthenticationResponseModel>.Success(response);
     }
 
     private string GenerateJwtToken(ProfileEntity user)
     {
         var claims = new List<Claim>()
         {
-            new Claim(ClaimTypes.SerialNumber, user.Id.ToString())
+            new Claim(ClaimTypes.SerialNumber, user.Id.ToString()),
+            new Claim(ClaimTypes.System, user.TimeZone.ToString())
         };
 
         if (!string.IsNullOrEmpty(user.UserName))
