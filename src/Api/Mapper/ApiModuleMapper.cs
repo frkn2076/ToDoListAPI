@@ -4,11 +4,13 @@ using Service.Models.Requests;
 
 namespace Api.Mapper;
 
-public class Mappers
+public class ApiModuleMapper
 {
     public static void Init()
     {
         TypeAdapterConfig<RegisterRequestModel, AuthenticationRequestDTO>.NewConfig();
+
+        TypeAdapterConfig<ListRequestModel, ListRequestDTO>.NewConfig();
 
         //TypeAdapterConfig<TokenDTOResponse, BaseResponse>.NewConfig();
         //.Map(dest => dest.AccessToken, src => src.AccessToken)
