@@ -2,37 +2,25 @@ version: '3.4'
 
 services:    
   api:
-    image: 'api'
-    container_name: 'api-container'
     build: 
       context: .
       dockerfile: src/Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
     ports:
       - '8080:80'
     depends_on:
       - db
-    networks:
-      - network
       
   db:
-    image: 'postgres:13-alpine'
-    container_name: 'db-container'
-    environment:
-      - POSTGRES_DB='mydb'
-      - POSTGRES_USER='postgres'
-      - POSTGRES_PASSWORD=''postgres'
-    ports:
-      - '5432:5432'
-    volumes:
+   image: postgres
+   restart: always
+   environment:
+     POSTGRES_PASSWORD: example
+     POSTGRES_DB: my_db
+   volumes:
       - volume:/var/lib/postgresql/data
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    restart: always
-    networks:
-      - network
 
 volumes:
   volume:
-
-networks:
-  network:
-    driver: bridge
