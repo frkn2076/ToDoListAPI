@@ -61,10 +61,13 @@ public static class Setup
         services.Configure<ConnectionStrings>(builder.Configuration.GetSection(nameof(ConnectionStrings)));
         services.Configure<JWTSettings>(builder.Configuration.GetSection(nameof(JWTSettings)));
 
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
         services.AddTransient<IConnectionService, ConnectionService>();
         services.AddTransient<IRepository, Repository>();
 
         services.AddTransient<IAuthenticationService, AuthenticationService>();
+        services.AddTransient<IItemService, ItemService>();
 
         services.AddScoped<CurrentUser>();
 
@@ -72,9 +75,6 @@ public static class Setup
         services.RegisterJWTAuthorization(jwtSettings);
 
         var serviceProvider = services.BuildServiceProvider();
-
-        //var connectionService = serviceProvider.GetRequiredService<IConnectionService>();
-        //var dbInitializer = new DBInitializer(connectionService);
     }
 
     #region Helper

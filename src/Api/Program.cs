@@ -2,6 +2,7 @@ using Api;
 using Api.Mapper;
 using Api.Models.Responses;
 using Microsoft.AspNetCore.Diagnostics;
+using Service.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +32,8 @@ app.Map("/error", (HttpContext context) =>
     }
 });
 
-Mappers.Init();
+ApiModuleMapper.Init();
+ServiceModuleMapper.Init();
 
 app.UseHttpsRedirection();
 
