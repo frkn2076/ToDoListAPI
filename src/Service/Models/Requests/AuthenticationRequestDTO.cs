@@ -1,6 +1,6 @@
 ﻿namespace Service.Models.Requests;
 
-public class AuthenticationRequestModel
+public class AuthenticationRequestDTO
 {
     public string UserName { get; set; }
 

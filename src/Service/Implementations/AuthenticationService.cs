@@ -25,13 +25,13 @@ public class AuthenticationService : IAuthenticationService
         _jwtSettings = jwtSettings.Value;
     }
 
-    public async Task<ServiceResponse<AuthenticationResponseModel>> Register(AuthenticationRequestModel model)
+    public async Task<ServiceResponse<AuthenticationResponseModel>> Register(AuthenticationRequestDTO model)
     {
         ArgumentNullException.ThrowIfNull(nameof(model));
 
         string passwordHash = BCrypt.Net.BCrypt.HashPassword(model.Password);
 
-        var profile = new Profile()
+        var profile = new ProfileEntity()
         {
             UserName = model.UserName,
             Password = passwordHash
@@ -60,7 +60,7 @@ public class AuthenticationService : IAuthenticationService
         return await GenerateTokenAsync(createdProfile);
     }
 
-    public async Task<ServiceResponse<AuthenticationResponseModel>> Login(AuthenticationRequestModel model)
+    public async Task<ServiceResponse<AuthenticationResponseModel>> Login(AuthenticationRequestDTO model)
     {
         ArgumentNullException.ThrowIfNull(nameof(model));
 
@@ -91,7 +91,7 @@ public class AuthenticationService : IAuthenticationService
 
     #region Helper
 
-    private async Task<ServiceResponse<AuthenticationResponseModel>> GenerateTokenAsync(Profile user)
+    private async Task<ServiceResponse<AuthenticationResponseModel>> GenerateTokenAsync(ProfileEntity user)
     {
         var token = GenerateJwtToken(user);
 
@@ -108,7 +108,7 @@ public class AuthenticationService : IAuthenticationService
         };
     }
 
-    private string GenerateJwtToken(Profile user)
+    private string GenerateJwtToken(ProfileEntity user)
     {
         var claims = new List<Claim>()
         {
