@@ -11,7 +11,10 @@ using Dapper;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Data.Seeder;
+using Api.Filters;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
 
 namespace Api;
 
@@ -21,10 +24,30 @@ public static class Setup
     {
         var services = builder.Services;
 
-        services.AddControllers();
+        builder.Services.AddControllers(options =>
+        {
+            options.Filters.Add(typeof(ValidateModelStateAttribute));
+        })
+        .AddFluentValidation(s =>
+        {
+            s.RegisterValidatorsFromAssemblyContaining<Program>();
+        });
+
+        builder.Services.Configure<ApiBehaviorOptions>(options =>
+        {
+            options.SuppressModelStateInvalidFilter = true;
+        });
 
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        builder.Services.AddSwaggerGen(opt =>
+        {
+            opt.SwaggerDoc("v1", new OpenApiInfo()
+            {
+                Version = "v1",
+                Title = "ToDoList API",
+                Description = "An API for managing tasks of the user"
+            });
+        });
 
         services.AddHttpContextAccessor();
 
@@ -50,9 +73,8 @@ public static class Setup
 
         var serviceProvider = services.BuildServiceProvider();
 
-        var connectionService = serviceProvider.GetRequiredService<IConnectionService>();
-        var dbInitializer = new DBInitializer(connectionService);
-        await dbInitializer.CreateSchemesAsync();
+        //var connectionService = serviceProvider.GetRequiredService<IConnectionService>();
+        //var dbInitializer = new DBInitializer(connectionService);
     }
 
     #region Helper
@@ -60,11 +82,13 @@ public static class Setup
     private static void RegisterJWTAuthorization(this IServiceCollection services, JWTSettings settings)
     {
         var key = Encoding.ASCII.GetBytes(settings.SecretKey);
-        services.AddAuthentication(x => {
+        services.AddAuthentication(x =>
+        {
             x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
         })
-        .AddJwtBearer(x => {
+        .AddJwtBearer(x =>
+        {
             x.RequireHttpsMetadata = false;
             x.SaveToken = true;
             x.TokenValidationParameters = new TokenValidationParameters
