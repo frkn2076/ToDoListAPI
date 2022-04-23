@@ -1,6 +1,6 @@
 ﻿namespace Data.Entities;
 
-public class Profile
+public class ProfileEntity
 {
     public int Id { get; set; }
     

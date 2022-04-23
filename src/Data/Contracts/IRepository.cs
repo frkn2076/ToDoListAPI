@@ -5,7 +5,7 @@ namespace Data.Contracts;
 
 public interface IRepository
 {
-    Task<Profile> GetProfileByUserNameAsync(string userName, IDbTransaction transaction = null);
+    Task<ProfileEntity> GetProfileByUserNameAsync(string userName, IDbTransaction transaction = null);
 
-    Task<Profile> CreateProfileAsync(Profile profile, IDbTransaction transaction = null);
+    Task<ProfileEntity> CreateProfileAsync(ProfileEntity profile, IDbTransaction transaction = null);
 }

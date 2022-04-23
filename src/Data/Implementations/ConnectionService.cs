@@ -18,14 +18,23 @@ public class ConnectionService : IConnectionService
 
     public IDbConnection GetPostgresConnection()
     {
-        if (_dbConnection != null && _dbConnection.State == ConnectionState.Open)
+        try
         {
+            if (_dbConnection != null && _dbConnection.State == ConnectionState.Open)
+            {
+                return _dbConnection;
+            }
+
+            _dbConnection = new NpgsqlConnection(_connectionStrings.PostgresContext);
+            _dbConnection.Open();
             return _dbConnection;
         }
+        catch (Exception e)
+        {
 
-        _dbConnection = new NpgsqlConnection(_connectionStrings.PostgresContext);
-        _dbConnection.Open();
-        return _dbConnection;
+            throw;
+        }
+        
     }
 
     public void CloseConnection()

@@ -3,6 +3,7 @@ using Data.Contracts;
 using Data.Entities;
 using Data.Utils;
 using System.Data;
+using System.Reflection;
 
 namespace Data.Implementations;
 
@@ -17,22 +18,22 @@ public class Repository : IRepository
         _connectionService = connectionService;
     }
 
-    public async Task<Profile> GetProfileByUserNameAsync(string userName, IDbTransaction transaction = null)
+    public async Task<ProfileEntity> GetProfileByUserNameAsync(string userName, IDbTransaction transaction = null)
     {
-        return await PostgresConnection.QueryFirstOrDefaultAsync<Profile>(GetQuery(Queries.GetProfileByUserNameQuery), new { userName }, transaction: transaction);
+        return await PostgresConnection.QueryFirstOrDefaultAsync<ProfileEntity>(GetQuery(Queries.GetProfileByUserNameQuery), new { userName }, transaction: transaction);
     }
 
-    public async Task<Profile> CreateProfileAsync(Profile profile, IDbTransaction transaction = null)
+    public async Task<ProfileEntity> CreateProfileAsync(ProfileEntity profile, IDbTransaction transaction = null)
     {
-        return await PostgresConnection.QueryFirstOrDefaultAsync<Profile>(GetQuery(Queries.CreateProfileQuery), profile, transaction: transaction);
+        return await PostgresConnection.QueryFirstOrDefaultAsync<ProfileEntity>(GetQuery(Queries.CreateProfileQuery), profile, transaction: transaction);
     }
 
     #region Helper
 
     private string GetQuery(string queryFileName)
     {
-        string currentDirectory = Directory.GetCurrentDirectory();
-        string path = Path.Combine(currentDirectory, Queries.AdhocFolderPath);
+        string sqlFolderPath = Path.Combine(Queries.SqlFolder, Queries.AdhocFolder);
+        string path = Path.Combine(AppContext.BaseDirectory, sqlFolderPath);
         string file = string.Concat(queryFileName, Queries.SqlFileExtension);
         return FileResourceUtility.LoadResource(path, file);
     }
