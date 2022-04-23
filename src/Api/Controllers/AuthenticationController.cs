@@ -1,24 +1,20 @@
-using Api;
 using Api.Models.Requests;
 using Api.Utils;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Service.Models.Requests;
 
 namespace ToDoListAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-//[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class AuthenticationController : ExtendedControllerBase
 {
-    private readonly CurrentUser _currentUser;
     private readonly IAuthenticationService _authenticationService;
 
-    public AuthenticationController(CurrentUser currentUser, IAuthenticationService authenticationService)
+    public AuthenticationController(IAuthenticationService authenticationService)
     {
-        _currentUser = currentUser;
         _authenticationService = authenticationService;
     }
 
@@ -31,16 +27,16 @@ public class AuthenticationController : ExtendedControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequestModel request)
     {
-        //var response = await _authenticationService.Register(request.UserName, request.Password);
-        //return HandleServiceResponse(response);
-        return Ok();
+        var requestDTO = request.Adapt<AuthenticationRequestDTO>();
+        var response = await _authenticationService.Register(requestDTO);
+        return HandleServiceResponse(response);
     }
 
     [HttpPost("login")]
     public async Task<IActionResult> Login(RegisterRequestModel request)
     {
-        //var response = await _authenticationService.Login(request.UserName, request.Password);
-        //return HandleServiceResponse(response);
-        return Ok();
+        var requestDTO = request.Adapt<AuthenticationRequestDTO>();
+        var response = await _authenticationService.Login(requestDTO);
+        return HandleServiceResponse(response);
     }
 }
