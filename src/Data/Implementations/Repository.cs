@@ -28,6 +28,17 @@ public class Repository : IRepository
         return await PostgresConnection.QueryFirstOrDefaultAsync<ProfileEntity>(GetQuery(Queries.CreateProfileQuery), profile, transaction: transaction);
     }
 
+    public async Task<ListEntity> CreateListAsync(ListEntity list, IDbTransaction transaction = null)
+    {
+        return await PostgresConnection.QueryFirstOrDefaultAsync<ListEntity>(GetQuery(Queries.CreateListQuery), list, transaction: transaction);
+    }
+
+    public async Task<bool> UpdateListAsync(ListEntity list, IDbTransaction transaction = null)
+    {
+        var affectedRows = await PostgresConnection.ExecuteAsync(GetQuery(Queries.UpdateListQuery), list, transaction: transaction);
+        return affectedRows > 0;
+    }
+
     #region Helper
 
     private string GetQuery(string queryFileName)

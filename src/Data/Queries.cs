@@ -10,6 +10,10 @@ public static class Queries
 
     #region Queries
 
+    public static string CreateListQuery = nameof(CreateListQuery);
+
+    public static string UpdateListQuery = nameof(UpdateListQuery);
+
     public static string CreateProfileQuery = nameof(CreateProfileQuery);
 
     public static string GetListsByProfileIdQuery = nameof(GetListsByProfileIdQuery);
