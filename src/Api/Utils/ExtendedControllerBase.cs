@@ -6,6 +6,7 @@ namespace Api.Utils;
 
 public abstract class ExtendedControllerBase : ControllerBase
 {
+    [NonAction]
     public virtual IActionResult HandleServiceResponse(ServiceResponse serviceResponse)
     {
         if (!serviceResponse.IsSuccessful)
