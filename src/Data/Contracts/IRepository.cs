@@ -12,4 +12,12 @@ public interface IRepository
     Task<ListEntity> CreateListAsync(ListEntity list, IDbTransaction transaction = null);
 
     Task<bool> UpdateListAsync(ListEntity list, IDbTransaction transaction = null);
+
+    Task<bool> DeleteListAsync(int id, IDbTransaction transaction = null);
+
+    Task<TaskEntity> CreateTaskAsync(TaskEntity task, IDbTransaction transaction = null);
+
+    Task<bool> UpdateTaskAsync(TaskEntity task, IDbTransaction transaction = null);
+
+    Task<bool> DeleteTaskAsync(int id, IDbTransaction transaction = null);
 }

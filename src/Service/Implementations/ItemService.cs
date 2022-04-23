@@ -71,4 +71,62 @@ public class ItemService : IItemService
 
         return ServiceResponse.Success();
     }
+
+    public async Task<ServiceResponse> DeleteListAsync(int id)
+    {
+        var isSuccessful = await _repository.DeleteListAsync(id);
+
+        if (!isSuccessful)
+        {
+            return ServiceResponse.Failure(ErrorMessages.OperationHasFailed);
+        }
+
+        return ServiceResponse.Success();
+    }
+
+    public async Task<ServiceResponse<TaskResponseDTO>> CreateTaskAsync(TaskRequestDTO model)
+    {
+        ArgumentNullException.ThrowIfNull(model);
+
+        var task = model.Adapt<TaskEntity>();
+
+        var createdTask = await _repository.CreateTaskAsync(task);
+
+        if (createdTask == null)
+        {
+            return ServiceResponse<TaskResponseDTO>.Failure(ErrorMessages.OperationHasFailed);
+        }
+
+        var response = createdTask.Adapt<TaskResponseDTO>();
+
+        return ServiceResponse<TaskResponseDTO>.Success(response);
+    }
+
+    public async Task<ServiceResponse> UpdateTaskAsync(TaskRequestDTO model)
+    {
+        ArgumentNullException.ThrowIfNull(model);
+
+        var task = model.Adapt<TaskEntity>();
+
+        var isSuccessful = await _repository.UpdateTaskAsync(task);
+
+        if (!isSuccessful)
+        {
+            return ServiceResponse.Failure(ErrorMessages.OperationHasFailed);
+        }
+
+        return ServiceResponse.Success();
+    }
+
+    public async Task<ServiceResponse> DeleteTaskAsync(int id)
+    {
+        var isSuccessful = await _repository.DeleteTaskAsync(id);
+
+        if (!isSuccessful)
+        {
+            return ServiceResponse.Failure(ErrorMessages.OperationHasFailed);
+        }
+
+        return ServiceResponse.Success();
+    }
 }

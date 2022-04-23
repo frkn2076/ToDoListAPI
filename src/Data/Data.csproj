@@ -17,6 +17,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Update="Sql\Adhoc\CreateTaskQuery.sql">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Sql\Adhoc\DeleteTaskQuery.sql">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Sql\Adhoc\DeleteListQuery.sql">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Sql\Adhoc\UpdateTaskQuery.sql">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	  <None Update="Sql\Adhoc\UpdateListQuery.sql">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>

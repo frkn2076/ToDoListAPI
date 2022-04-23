@@ -14,6 +14,14 @@ public static class Queries
 
     public static string UpdateListQuery = nameof(UpdateListQuery);
 
+    public static string DeleteListQuery = nameof(DeleteListQuery);
+
+    public static string CreateTaskQuery = nameof(CreateTaskQuery);
+
+    public static string UpdateTaskQuery = nameof(UpdateTaskQuery);
+
+    public static string DeleteTaskQuery = nameof(DeleteTaskQuery);
+
     public static string CreateProfileQuery = nameof(CreateProfileQuery);
 
     public static string GetListsByProfileIdQuery = nameof(GetListsByProfileIdQuery);

@@ -2,10 +2,10 @@
 	      ( title
 		  , description
 		  , date
-		  , profileid)
+		  , profileid )
 	 VALUES 
 	      ( @title
 		  , @description
 		  , @date
-		  , @profileId)
+		  , @profileId )
   RETURNING *

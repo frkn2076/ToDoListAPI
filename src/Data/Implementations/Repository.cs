@@ -3,7 +3,6 @@ using Data.Contracts;
 using Data.Entities;
 using Data.Utils;
 using System.Data;
-using System.Reflection;
 
 namespace Data.Implementations;
 
@@ -36,6 +35,29 @@ public class Repository : IRepository
     public async Task<bool> UpdateListAsync(ListEntity list, IDbTransaction transaction = null)
     {
         var affectedRows = await PostgresConnection.ExecuteAsync(GetQuery(Queries.UpdateListQuery), list, transaction: transaction);
+        return affectedRows > 0;
+    }
+
+    public async Task<bool> DeleteListAsync(int id, IDbTransaction transaction = null)
+    {
+        var affectedRows = await PostgresConnection.ExecuteAsync(GetQuery(Queries.DeleteListQuery), new { id }, transaction: transaction);
+        return affectedRows > 0;
+    }
+
+    public async Task<TaskEntity> CreateTaskAsync(TaskEntity task, IDbTransaction transaction = null)
+    {
+        return await PostgresConnection.QueryFirstOrDefaultAsync<TaskEntity>(GetQuery(Queries.CreateTaskQuery), task, transaction: transaction);
+    }
+
+    public async Task<bool> UpdateTaskAsync(TaskEntity task, IDbTransaction transaction = null)
+    {
+        var affectedRows = await PostgresConnection.ExecuteAsync(GetQuery(Queries.UpdateTaskQuery), task, transaction: transaction);
+        return affectedRows > 0;
+    }
+
+    public async Task<bool> DeleteTaskAsync(int id, IDbTransaction transaction = null)
+    {
+        var affectedRows = await PostgresConnection.ExecuteAsync(GetQuery(Queries.DeleteTaskQuery), new { id }, transaction: transaction);
         return affectedRows > 0;
     }
 
