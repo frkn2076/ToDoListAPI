@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Api.Models.Responses;
+using Microsoft.AspNetCore.Mvc;
 using Service.Models;
 
 namespace Api.Utils;
@@ -9,9 +10,9 @@ public abstract class ExtendedControllerBase : ControllerBase
     {
         if (!serviceResponse.IsSuccessful)
         {
-            return StatusCode(500, serviceResponse.Error);
+            return StatusCode(500, ResponseModel.Failure(serviceResponse.Error));
         }
 
-        return Ok(serviceResponse.Response);
+        return Ok(ResponseModel.Success(serviceResponse.Response));
     }
 }
