@@ -27,7 +27,11 @@ https://github.com/frkn2076/ToDoListAPI/blob/develop/ToDoListAPI.postman_collect
   | Delete Task                 | DELETE        | item/task/{id}            |
   
 
+<br>
 
+## Note
+ * Set isrefresh parameter of Filter Lists By Pagination as **true** when you change your filter model or when you start pagination again.
+ 
 <br>
 
 ## Databases
@@ -43,5 +47,4 @@ https://github.com/frkn2076/ToDoListAPI/blob/develop/ToDoListAPI.postman_collect
  * Fluent Validation
  * Mapster
 
-## PS
- * Set isrefresh parameter of Filter Lists By Pagination as **true** when you change your filter model or when you start pagination again.
+
