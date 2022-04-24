@@ -8,12 +8,9 @@
 
 	<ItemGroup>
 		<PackageReference Include="Dapper" Version="2.0.123" />
+		<PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
 		<PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
 		<PackageReference Include="Npgsql" Version="6.0.4" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Seeder\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -26,10 +23,19 @@
 	  <None Update="Sql\Adhoc\DeleteListQuery.sql">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="Sql\Adhoc\GetAnyTaskExistsQuery.sql">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Sql\Adhoc\GetAnyListExistsQuery.sql">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	  <None Update="Sql\Adhoc\GetTimeZoneByIdQuery.sql">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="Sql\Adhoc\GetTasksByFilterQuery.sql">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Sql\Adhoc\GetAnyProfileExistsQuery.sql">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="Sql\Adhoc\UpdateUserTimeZoneQuery.sql">

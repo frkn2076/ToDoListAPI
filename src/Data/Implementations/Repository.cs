@@ -89,6 +89,21 @@ public class Repository : IRepository
         return await PostgresConnection.QueryFirstOrDefaultAsync<int>(GetQuery(Queries.GetTimeZoneByIdQuery), new { profileId }, transaction: transaction);
     }
 
+    public async Task<bool> GetAnyListExistsAsync(IDbTransaction transaction = null)
+    {
+        return await PostgresConnection.QueryFirstOrDefaultAsync<bool>(GetQuery(Queries.GetAnyListExistsQuery), transaction: transaction);
+    }
+
+    public async Task<bool> GetAnyProfileExistsAsync(IDbTransaction transaction = null)
+    {
+        return await PostgresConnection.QueryFirstOrDefaultAsync<bool>(GetQuery(Queries.GetAnyProfileExistsQuery), transaction: transaction);
+    }
+
+    public async Task<bool> GetAnyTaskExistsAsync(IDbTransaction transaction = null)
+    {
+        return await PostgresConnection.QueryFirstOrDefaultAsync<bool>(GetQuery(Queries.GetAnyTaskExistsQuery), transaction: transaction);
+    }
+
     #region Helper
 
     private string GetQuery(string queryFileName)

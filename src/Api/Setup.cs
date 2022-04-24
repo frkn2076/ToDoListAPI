@@ -15,6 +15,7 @@ using Api.Filters;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using Data.Seeder;
 
 namespace Api;
 
@@ -75,6 +76,10 @@ public static class Setup
         services.RegisterJWTAuthorization(jwtSettings);
 
         var serviceProvider = services.BuildServiceProvider();
+
+        var repository = serviceProvider.GetRequiredService<IRepository>();
+        var seeder = new Seeder(repository);
+        await seeder.Init();
     }
 
     #region Helper

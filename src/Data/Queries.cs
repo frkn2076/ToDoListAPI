@@ -36,5 +36,11 @@ public static class Queries
 
     public static string GetTimeZoneByIdQuery = nameof(GetTimeZoneByIdQuery);
 
+    public static string GetAnyListExistsQuery = nameof(GetAnyListExistsQuery);
+
+    public static string GetAnyProfileExistsQuery = nameof(GetAnyProfileExistsQuery);
+
+    public static string GetAnyTaskExistsQuery = nameof(GetAnyTaskExistsQuery);
+
     #endregion Queries
 }
