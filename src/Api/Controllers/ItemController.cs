@@ -28,11 +28,12 @@ public class ItemController : ExtendedControllerBase
         _itemService = itemService;
     }
 
-    //[HttpGet("test")]
-    //public IActionResult Get()
-    //{
-    //    return Ok($"{nameof(ItemController)} is working properly!");
-    //}
+    [AllowAnonymous]
+    [HttpGet("test")]
+    public IActionResult Get()
+    {
+        return Ok($"{nameof(ItemController)} is working properly!");
+    }
 
     //[HttpPost("all")]
     //public async Task<IActionResult> GetListsOfUserByPagination(ListPaginationFilterRequestModel request)
