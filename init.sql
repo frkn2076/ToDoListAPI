@@ -15,9 +15,9 @@ CREATE TABLE IF NOT EXISTS list (
 
 CREATE TABLE IF NOT EXISTS task (
     id serial PRIMARY KEY,
-    title VARCHAR (20) NULL,
-    description VARCHAR (100) NULL,
-    deadline TIMESTAMP WITH TIME ZONE NULL,
+    title VARCHAR (20) NOT NULL,
+    description VARCHAR (100) NOT NULL,
+    deadline TIMESTAMP WITH TIME ZONE NOT NULL,
     isDone BOOLEAN NOT NULL,
     listId NUMERIC (7) NOT NULL
 );
