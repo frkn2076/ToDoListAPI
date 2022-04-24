@@ -1,4 +1,5 @@
 ﻿using Data.Entities;
+using Data.Models;
 using System.Data;
 
 namespace Data.Contracts;
@@ -26,4 +27,6 @@ public interface IRepository
     Task<bool> UpdateTaskStatusAsync(bool isDone, int id, IDbTransaction transaction = null);
 
     Task<bool> UpdateUserTimeZoneAsync(int timeZone, int profileId, IDbTransaction transaction = null);
+
+    Task<IEnumerable<ListEntity>> GetListsOfUserAsync(ListPaginationFilter filter, IDbTransaction transaction = null);
 }

@@ -21,4 +21,6 @@ public interface IItemService
     Task<ServiceResponse> UpdateTaskStatusAsync(bool isDone, int id);
 
     Task<ServiceResponse> UpdateUserTimeZoneAsync(int timeZone, int profileId);
+
+    Task<ServiceResponse<IEnumerable<ListResponseDTO>>> GetListsOfUserAsync(ListPaginationFilterRequestDTO model, int timeZone);
 }

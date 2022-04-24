@@ -35,23 +35,6 @@ public class ItemController : ExtendedControllerBase
         return Ok($"{nameof(ItemController)} is working properly!");
     }
 
-    //[HttpPost("all")]
-    //public async Task<IActionResult> GetListsOfUserByPagination(ListPaginationFilterRequestModel request)
-    //{
-    //    var skip = HttpContext.Session.GetInt32(PAGINATION_INDEX_KEY) ?? 0;
-
-    //    //var response = await _itemService.GetActivitiesAsync(PAGINATION_COUNT, skip);
-
-    //    skip += PAGINATION_COUNT;
-
-    //    HttpContext.Session.SetInt32(PAGINATION_INDEX_KEY, skip);
-
-    //    //return HandleServiceResponse(response);
-    //    //var b = DateTimeOffset.UtcNow;
-    //    //b.ToOffset(TimeSpan.Zero);
-    //    return Ok();
-    //}
-
     [HttpPost("list")]
     public async Task<IActionResult> CreateListAsync(ListRequestModel request)
     {
@@ -113,4 +96,28 @@ public class ItemController : ExtendedControllerBase
         var response = await _itemService.UpdateUserTimeZoneAsync(request.TimeZone, _currentUser.Id);
         return HandleServiceResponse(response);
     }
+
+    [HttpPost("list/all")]
+    public async Task<IActionResult> GetListsOfUserByPagination(ListPaginationFilterRequestModel request)
+    {
+        int skip = 0;
+
+        if (!request.IsRefresh)
+        {
+            skip = HttpContext.Session.GetInt32(PAGINATION_INDEX_KEY) ?? 0;
+        }
+
+        var requestDTO = request.Adapt<ListPaginationFilterRequestDTO>();
+        requestDTO.Skip = skip;
+        requestDTO.Count = PAGINATION_COUNT;
+        requestDTO.ProfileId = _currentUser.Id;
+
+        var response = await _itemService.GetListsOfUserAsync(requestDTO, _currentUser.TimeZone);
+
+        skip += PAGINATION_COUNT;
+        HttpContext.Session.SetInt32(PAGINATION_INDEX_KEY, skip);
+
+        return HandleServiceResponse(response);
+    }
+
 }

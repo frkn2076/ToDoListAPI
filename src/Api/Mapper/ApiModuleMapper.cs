@@ -1,5 +1,6 @@
 ﻿using Api.Models.Requests;
 using Data.Entities;
+using Data.Models;
 using Mapster;
 using Service.Models.Requests;
 using Service.Models.Responses;
@@ -18,11 +19,7 @@ public class ApiModuleMapper
 
         TypeAdapterConfig<TaskRequestModel, TaskRequestDTO>.NewConfig();
 
-        //TypeAdapterConfig<TokenDTOResponse, BaseResponse>.NewConfig();
-        //.Map(dest => dest.AccessToken, src => src.AccessToken)
-        //.Map(dest => dest.AccessTokenExpiresIn, src => src.AccessTokenExpiresIn)
-        //.Map(dest => dest.RefreshToken, src => src.RefreshToken)
-        //.Map(dest => dest.RefreshTokenExpiresIn, src => src.RefreshTokenExpiresIn);
+        TypeAdapterConfig<ListPaginationFilterRequestModel, ListPaginationFilterRequestDTO>.NewConfig();
 
         #endregion
 
@@ -31,6 +28,8 @@ public class ApiModuleMapper
         TypeAdapterConfig<ListRequestDTO, ListEntity>.NewConfig();
 
         TypeAdapterConfig<TaskRequestDTO, TaskEntity>.NewConfig();
+
+        TypeAdapterConfig<ListPaginationFilterRequestDTO, ListPaginationFilter>.NewConfig();
 
         #endregion
 

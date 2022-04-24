@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Data.Contracts;
 using Data.Entities;
+using Data.Models;
 using Data.Utils;
 using System.Data;
 
@@ -71,6 +72,11 @@ public class Repository : IRepository
     {
         var affectedRows = await PostgresConnection.ExecuteAsync(GetQuery(Queries.UpdateUserTimeZoneQuery), new { timeZone, profileId }, transaction: transaction);
         return affectedRows > 0;
+    }
+
+    public async Task<IEnumerable<ListEntity>> GetListsOfUserAsync(ListPaginationFilter filter, IDbTransaction transaction = null)
+    {
+        return await PostgresConnection.QueryAsync<ListEntity>(GetQuery(Queries.GetListsByFilterQuery), filter, transaction: transaction);
     }
 
     #region Helper

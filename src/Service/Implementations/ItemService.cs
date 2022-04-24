@@ -1,6 +1,7 @@
 ﻿using Data;
 using Data.Contracts;
 using Data.Entities;
+using Data.Models;
 using Mapster;
 using Service.Contracts;
 using Service.Models;
@@ -17,25 +18,6 @@ public class ItemService : IItemService
     {
         _repository = repository;
     }
-
-    //public async Task<ServiceResponse<IEnumerable<string>>> GetListsOfUserAsync(int profileId, int skip, int count)
-    //{
-    //    var activities = await _repository.GetActivityAsync(count, skip);
-
-    //    if (activities == null || !activities.Any())
-    //    {
-    //        return new()
-    //        {
-    //            Error = ErrorMessages.NoRecordHasFound
-    //        };
-    //    }
-
-    //    return new()
-    //    {
-    //        IsSuccessful = true,
-    //        Response = activities
-    //    };
-    //}
 
     public async Task<ServiceResponse<ListResponseDTO>> CreateListAsync(ListRequestDTO model, int profileId)
     {
@@ -152,5 +134,29 @@ public class ItemService : IItemService
         }
 
         return ServiceResponse.Success();
+    }
+
+    public async Task<ServiceResponse<IEnumerable<ListResponseDTO>>> GetListsOfUserAsync(ListPaginationFilterRequestDTO model, int timeZone)
+    {
+        ArgumentNullException.ThrowIfNull(model);
+
+        var filter = model.Adapt<ListPaginationFilter>();
+
+        var lists = await _repository.GetListsOfUserAsync(filter);
+
+        if (lists == null || !lists.Any())
+        {
+            return ServiceResponse<IEnumerable<ListResponseDTO>>.Failure(ErrorMessages.OperationHasFailed);
+        }
+
+        var response = lists.Select(x => new ListResponseDTO()
+        {
+            Id = x.Id,
+            Title = x.Title,
+            Description = x.Description,
+            Date = x.Date.ToOffset(new TimeSpan(timeZone, 0, 0))
+        });
+
+        return ServiceResponse<IEnumerable<ListResponseDTO>>.Success(response);
     }
 }

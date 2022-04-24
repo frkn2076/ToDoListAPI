@@ -2,7 +2,9 @@
 
 public class ListPaginationFilterRequestModel
 {
-    public DateOnly Date { get; set; }
+    public DateTimeOffset DateMin { get; set; }
+
+    public DateTimeOffset DateMax { get; set; }
 
     public string Title { get; set; }
 

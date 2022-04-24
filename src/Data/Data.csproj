@@ -44,7 +44,7 @@
 	  <None Update="Sql\Adhoc\CreateProfileQuery.sql">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	  <None Update="Sql\Adhoc\GetListsByProfileIdQuery.sql">
+	  <None Update="Sql\Adhoc\GetListsByFilterQuery.sql">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
 	  <None Update="Sql\Adhoc\GetProfileByUserNameQuery.sql">

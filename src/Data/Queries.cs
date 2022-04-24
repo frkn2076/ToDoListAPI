@@ -28,7 +28,7 @@ public static class Queries
 
     public static string CreateProfileQuery = nameof(CreateProfileQuery);
 
-    public static string GetListsByProfileIdQuery = nameof(GetListsByProfileIdQuery);
+    public static string GetListsByFilterQuery = nameof(GetListsByFilterQuery);
 
     public static string GetProfileByUserNameQuery = nameof(GetProfileByUserNameQuery);
 
