@@ -56,7 +56,7 @@ public class AuthenticationService : IAuthenticationService
 
     public async Task<ServiceResponse<AuthenticationResponseDTO>> Login(AuthenticationRequestDTO model)
     {
-        ArgumentNullException.ThrowIfNull(nameof(model));
+        ArgumentNullException.ThrowIfNull(model);
 
         var profile = await _repository.GetProfileByUserNameAsync(model.UserName);
 
