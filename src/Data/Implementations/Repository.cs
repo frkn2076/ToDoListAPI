@@ -67,6 +67,12 @@ public class Repository : IRepository
         return affectedRows > 0;
     }
 
+    public async Task<bool> UpdateUserTimeZoneAsync(int timeZone, int profileId, IDbTransaction transaction = null)
+    {
+        var affectedRows = await PostgresConnection.ExecuteAsync(GetQuery(Queries.UpdateUserTimeZoneQuery), new { timeZone, profileId }, transaction: transaction);
+        return affectedRows > 0;
+    }
+
     #region Helper
 
     private string GetQuery(string queryFileName)

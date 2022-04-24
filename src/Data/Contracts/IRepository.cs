@@ -5,6 +5,8 @@ namespace Data.Contracts;
 
 public interface IRepository
 {
+    public IDbConnection PostgresConnection { get; }
+
     Task<ProfileEntity> GetProfileByUserNameAsync(string userName, IDbTransaction transaction = null);
 
     Task<ProfileEntity> CreateProfileAsync(ProfileEntity profile, IDbTransaction transaction = null);
@@ -22,4 +24,6 @@ public interface IRepository
     Task<bool> DeleteTaskAsync(int id, IDbTransaction transaction = null);
 
     Task<bool> UpdateTaskStatusAsync(bool isDone, int id, IDbTransaction transaction = null);
+
+    Task<bool> UpdateUserTimeZoneAsync(int timeZone, int profileId, IDbTransaction transaction = null);
 }

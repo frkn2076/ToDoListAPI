@@ -19,4 +19,6 @@ public interface IItemService
     Task<ServiceResponse> DeleteTaskAsync(int id);
 
     Task<ServiceResponse> UpdateTaskStatusAsync(bool isDone, int id);
+
+    Task<ServiceResponse> UpdateUserTimeZoneAsync(int timeZone, int profileId);
 }

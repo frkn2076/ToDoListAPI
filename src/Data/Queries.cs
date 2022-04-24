@@ -22,6 +22,8 @@ public static class Queries
 
     public static string UpdateTaskStatusQuery = nameof(UpdateTaskStatusQuery);
 
+    public static string UpdateUserTimeZoneQuery = nameof(UpdateUserTimeZoneQuery);
+
     public static string DeleteTaskQuery = nameof(DeleteTaskQuery);
 
     public static string CreateProfileQuery = nameof(CreateProfileQuery);

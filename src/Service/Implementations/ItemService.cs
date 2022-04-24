@@ -141,4 +141,16 @@ public class ItemService : IItemService
 
         return ServiceResponse.Success();
     }
+
+    public async Task<ServiceResponse> UpdateUserTimeZoneAsync(int timeZone, int profileId)
+    {
+        var isSuccessful = await _repository.UpdateUserTimeZoneAsync(timeZone, profileId);
+
+        if (!isSuccessful)
+        {
+            return ServiceResponse.Failure(ErrorMessages.OperationHasFailed);
+        }
+
+        return ServiceResponse.Success();
+    }
 }

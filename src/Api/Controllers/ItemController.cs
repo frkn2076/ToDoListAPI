@@ -106,4 +106,11 @@ public class ItemController : ExtendedControllerBase
         var response = await _itemService.UpdateTaskStatusAsync(request.IsDone, id);
         return HandleServiceResponse(response);
     }
+
+    [HttpPut("user/timezone")]
+    public async Task<IActionResult> UpdateUserTimeZoneAsync(UserTimeZoneRequestModel request)
+    {
+        var response = await _itemService.UpdateUserTimeZoneAsync(request.TimeZone, _currentUser.Id);
+        return HandleServiceResponse(response);
+    }
 }
