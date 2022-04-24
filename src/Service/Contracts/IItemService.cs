@@ -24,5 +24,5 @@ public interface IItemService
 
     Task<ServiceResponse<IEnumerable<ListResponseDTO>>> GetListsOfUserAsync(ListPaginationFilterRequestDTO model, int profileId);
 
-    Task<ServiceResponse<IEnumerable<TaskResponseDTO>>> GetTasksOfListAsync(TaskFilterRequestDTO model, int timeZone);
+    Task<ServiceResponse<IEnumerable<TaskResponseDTO>>> GetTasksOfListAsync(TaskFilterRequestDTO model, int profileId);
 }

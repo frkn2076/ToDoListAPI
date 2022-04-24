@@ -124,7 +124,7 @@ public class ItemController : ExtendedControllerBase
     public async Task<IActionResult> GetTasksOfListAsync(TaskFilterRequestModel request)
     {
         var requestDTO = request.Adapt<TaskFilterRequestDTO>();
-        var response = await _itemService.GetTasksOfListAsync(requestDTO, _currentUser.TimeZone);
+        var response = await _itemService.GetTasksOfListAsync(requestDTO, _currentUser.Id);
         return HandleServiceResponse(response);
     }
 }
