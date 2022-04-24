@@ -84,6 +84,11 @@ public class Repository : IRepository
         return await PostgresConnection.QueryAsync<TaskEntity>(GetQuery(Queries.GetTasksByFilterQuery), filter, transaction: transaction);
     }
 
+    public async Task<int> GetTimeZoneByIdAsync(int profileId, IDbTransaction transaction = null)
+    {
+        return await PostgresConnection.QueryFirstOrDefaultAsync<int>(GetQuery(Queries.GetTimeZoneByIdQuery), new { profileId }, transaction: transaction);
+    }
+
     #region Helper
 
     private string GetQuery(string queryFileName)

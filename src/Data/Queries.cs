@@ -34,5 +34,7 @@ public static class Queries
 
     public static string GetTasksByFilterQuery = nameof(GetTasksByFilterQuery);
 
+    public static string GetTimeZoneByIdQuery = nameof(GetTimeZoneByIdQuery);
+
     #endregion Queries
 }

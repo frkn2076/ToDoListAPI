@@ -136,7 +136,7 @@ public class ItemService : IItemService
         return ServiceResponse.Success();
     }
 
-    public async Task<ServiceResponse<IEnumerable<ListResponseDTO>>> GetListsOfUserAsync(ListPaginationFilterRequestDTO model, int timeZone)
+    public async Task<ServiceResponse<IEnumerable<ListResponseDTO>>> GetListsOfUserAsync(ListPaginationFilterRequestDTO model, int profileId)
     {
         ArgumentNullException.ThrowIfNull(model);
 
@@ -148,6 +148,8 @@ public class ItemService : IItemService
         {
             return ServiceResponse<IEnumerable<ListResponseDTO>>.Failure(ErrorMessages.NoRecordHasFound);
         }
+
+        var timeZone = await _repository.GetTimeZoneByIdAsync(profileId);
 
         var response = lists.Select(x => new ListResponseDTO()
         {

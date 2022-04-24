@@ -112,7 +112,7 @@ public class ItemController : ExtendedControllerBase
         requestDTO.Count = PAGINATION_COUNT;
         requestDTO.ProfileId = _currentUser.Id;
 
-        var response = await _itemService.GetListsOfUserAsync(requestDTO, _currentUser.TimeZone);
+        var response = await _itemService.GetListsOfUserAsync(requestDTO, _currentUser.Id);
 
         skip += PAGINATION_COUNT;
         HttpContext.Session.SetInt32(PAGINATION_INDEX_KEY, skip);

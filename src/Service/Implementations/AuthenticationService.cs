@@ -94,8 +94,7 @@ public class AuthenticationService : IAuthenticationService
     {
         var claims = new List<Claim>()
         {
-            new Claim(ClaimTypes.SerialNumber, user.Id.ToString()),
-            new Claim(ClaimTypes.System, user.TimeZone.ToString())
+            new Claim(ClaimTypes.SerialNumber, user.Id.ToString())
         };
 
         if (!string.IsNullOrEmpty(user.UserName))

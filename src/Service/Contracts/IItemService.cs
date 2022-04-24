@@ -22,7 +22,7 @@ public interface IItemService
 
     Task<ServiceResponse> UpdateUserTimeZoneAsync(int timeZone, int profileId);
 
-    Task<ServiceResponse<IEnumerable<ListResponseDTO>>> GetListsOfUserAsync(ListPaginationFilterRequestDTO model, int timeZone);
+    Task<ServiceResponse<IEnumerable<ListResponseDTO>>> GetListsOfUserAsync(ListPaginationFilterRequestDTO model, int profileId);
 
     Task<ServiceResponse<IEnumerable<TaskResponseDTO>>> GetTasksOfListAsync(TaskFilterRequestDTO model, int timeZone);
 }
