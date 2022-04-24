@@ -29,6 +29,13 @@ public class AuthenticationService : IAuthenticationService
     {
         ArgumentNullException.ThrowIfNull(model);
 
+        var existingProfile = await _repository.GetProfileByUserNameAsync(model.UserName);
+
+        if (existingProfile != null)
+        {
+            return ServiceResponse<AuthenticationResponseDTO>.Failure(ErrorMessages.UserAlreadyExists);
+        }
+
         string passwordHash = BCrypt.Net.BCrypt.HashPassword(model.Password);
 
         var profile = new ProfileEntity()
@@ -36,13 +43,6 @@ public class AuthenticationService : IAuthenticationService
             UserName = model.UserName,
             Password = passwordHash
         };
-
-        var existingProfile = await _repository.GetProfileByUserNameAsync(model.UserName);
-
-        if (existingProfile != null)
-        {
-            return ServiceResponse<AuthenticationResponseDTO>.Failure(ErrorMessages.UserAlreadyExists);
-        }
 
         var createdProfile = await _repository.CreateProfileAsync(profile);
 
@@ -65,9 +65,7 @@ public class AuthenticationService : IAuthenticationService
             return ServiceResponse<AuthenticationResponseDTO>.Failure(ErrorMessages.UserNotFound);
         }
 
-        string passwordHash = BCrypt.Net.BCrypt.HashPassword(model.Password);
-
-        bool isVerified = BCrypt.Net.BCrypt.Verify(model.Password, passwordHash);
+        bool isVerified = BCrypt.Net.BCrypt.Verify(model.Password, profile.Password);
 
         if (!isVerified)
         {
