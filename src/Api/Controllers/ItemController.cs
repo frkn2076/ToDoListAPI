@@ -53,7 +53,7 @@ public class ItemController : ExtendedControllerBase
     //}
 
     [HttpPost("list")]
-    public async Task<IActionResult> CreateList(ListRequestModel request)
+    public async Task<IActionResult> CreateListAsync(ListRequestModel request)
     {
         var requestDTO = request.Adapt<ListRequestDTO>();
         var response = await _itemService.CreateListAsync(requestDTO, _currentUser.Id);
@@ -61,7 +61,7 @@ public class ItemController : ExtendedControllerBase
     }
 
     [HttpPut("list/{id}")]
-    public async Task<IActionResult> UpdateList(ListRequestModel request, int id)
+    public async Task<IActionResult> UpdateListAsync(ListRequestModel request, int id)
     {
         var requestDTO = request.Adapt<ListRequestDTO>();
         requestDTO.Id = id;
@@ -70,14 +70,14 @@ public class ItemController : ExtendedControllerBase
     }
 
     [HttpDelete("list/{id}")]
-    public async Task<IActionResult> DeleteList(int id)
+    public async Task<IActionResult> DeleteListAsync(int id)
     {
         var response = await _itemService.DeleteListAsync(id);
         return HandleServiceResponse(response);
     }
 
     [HttpPost("task")]
-    public async Task<IActionResult> CreateTask(TaskRequestModel request)
+    public async Task<IActionResult> CreateTaskAsync(TaskRequestModel request)
     {
         var requestDTO = request.Adapt<TaskRequestDTO>();
         var response = await _itemService.CreateTaskAsync(requestDTO);
@@ -85,7 +85,7 @@ public class ItemController : ExtendedControllerBase
     }
 
     [HttpPut("task/{id}")]
-    public async Task<IActionResult> UpdateTask(TaskRequestModel request, int id)
+    public async Task<IActionResult> UpdateTaskAsync(TaskRequestModel request, int id)
     {
         var requestDTO = request.Adapt<TaskRequestDTO>();
         requestDTO.Id = id;
@@ -94,14 +94,14 @@ public class ItemController : ExtendedControllerBase
     }
 
     [HttpDelete("task/{id}")]
-    public async Task<IActionResult> DeleteTask(int id)
+    public async Task<IActionResult> DeleteTaskAsync(int id)
     {
         var response = await _itemService.DeleteTaskAsync(id);
         return HandleServiceResponse(response);
     }
 
     [HttpPut("task/status/{id}")]
-    public async Task<IActionResult> UpdateTaskStatus(TaskStatusRequestModel request, int id)
+    public async Task<IActionResult> UpdateTaskStatusAsync(TaskStatusRequestModel request, int id)
     {
         var response = await _itemService.UpdateTaskStatusAsync(request.IsDone, id);
         return HandleServiceResponse(response);

@@ -25,7 +25,7 @@ public class AuthenticationController : ExtendedControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterRequestModel request)
+    public async Task<IActionResult> RegisterAsync(RegisterRequestModel request)
     {
         var requestDTO = request.Adapt<AuthenticationRequestDTO>();
         var response = await _authenticationService.Register(requestDTO);
@@ -33,7 +33,7 @@ public class AuthenticationController : ExtendedControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login(RegisterRequestModel request)
+    public async Task<IActionResult> LoginAsync(RegisterRequestModel request)
     {
         var requestDTO = request.Adapt<AuthenticationRequestDTO>();
         var response = await _authenticationService.Login(requestDTO);
