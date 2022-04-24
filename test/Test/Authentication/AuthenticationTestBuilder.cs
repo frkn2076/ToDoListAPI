@@ -9,9 +9,9 @@ using System.Data;
 
 namespace Test.Authentication;
 
-public class ItemTestBuilder
+public class AuthenticationBuilder
 {
-    public static ItemTestBuilder Create() => new();
+    public static AuthenticationBuilder Create() => new();
 
     public IAuthenticationService AuthenticationService;
     private Mock<IRepository> _repository { get; set; } = new Mock<IRepository>();

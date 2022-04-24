@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Test.Authentication;
 
-public class ItemTests
+public class AuthenticationTests
 {
     [Test]
     public async Task Login_Throws_Exception_If_Input_Is_Null()
     {
-        var builder = ItemTestBuilder.Create();
+        var builder = AuthenticationBuilder.Create();
         builder.SetupAuthenticationService();
 
         Assert.ThrowsAsync<ArgumentNullException>(() => builder.AuthenticationService.Login(null));
@@ -20,7 +20,7 @@ public class ItemTests
     [Test]
     public async Task Login_Returns_UserNotFound_If_Profile_Not_Found()
     {
-        var builder = ItemTestBuilder.Create();
+        var builder = AuthenticationBuilder.Create();
         builder.SetupAuthenticationService();
 
         var response = await builder.AuthenticationService.Login(new AuthenticationRequestDTO());
@@ -32,7 +32,7 @@ public class ItemTests
     [Test]
     public async Task Login_Returns_WrongPassword_If_Password_Not_Verified()
     {
-        var builder = ItemTestBuilder.Create();
+        var builder = AuthenticationBuilder.Create();
         builder.SetupGetProfileByUserNameAsync("furkan", BCrypt.Net.BCrypt.HashPassword("12345"));
         builder.SetupAuthenticationService();
 
@@ -50,7 +50,7 @@ public class ItemTests
     [Test]
     public async Task Login_Returns_Success_If_Password_Verified()
     {
-        var builder = ItemTestBuilder.Create();
+        var builder = AuthenticationBuilder.Create();
         builder.SetupJWTSettings();
         builder.SetupGetProfileByUserNameAsync("furkan", BCrypt.Net.BCrypt.HashPassword("12345"));
         builder.SetupAuthenticationService();
@@ -68,7 +68,7 @@ public class ItemTests
     [Test]
     public async Task Register_Throws_Exception_If_Input_Is_Null()
     {
-        var builder = ItemTestBuilder.Create();
+        var builder = AuthenticationBuilder.Create();
         builder.SetupAuthenticationService();
 
         Assert.ThrowsAsync<ArgumentNullException>(() => builder.AuthenticationService.Register(null));
@@ -77,7 +77,7 @@ public class ItemTests
     [Test]
     public async Task Register_Returns_UserAlreadyExists_If_Profile_Exists()
     {
-        var builder = ItemTestBuilder.Create();
+        var builder = AuthenticationBuilder.Create();
         builder.SetupGetProfileByUserNameAsync("furkan", BCrypt.Net.BCrypt.HashPassword("12345"));
         builder.SetupAuthenticationService();
 
@@ -90,7 +90,7 @@ public class ItemTests
     [Test]
     public async Task Register_Returns_OperationHasFailed_If_Profile_Creation_Fails()
     {
-        var builder = ItemTestBuilder.Create();
+        var builder = AuthenticationBuilder.Create();
         builder.SetupAuthenticationService();
 
         var request = new AuthenticationRequestDTO()
@@ -107,7 +107,7 @@ public class ItemTests
     [Test]
     public async Task Register_Returns_Success_If_Profile_Is_Being_Created_Successfully()
     {
-        var builder = ItemTestBuilder.Create();
+        var builder = AuthenticationBuilder.Create();
         builder.SetupJWTSettings();
         builder.SetupCreateProfileAsync();
         builder.SetupAuthenticationService();
