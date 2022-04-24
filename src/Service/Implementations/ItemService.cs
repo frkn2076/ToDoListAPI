@@ -159,4 +159,28 @@ public class ItemService : IItemService
 
         return ServiceResponse<IEnumerable<ListResponseDTO>>.Success(response);
     }
+
+    public async Task<ServiceResponse<IEnumerable<TaskResponseDTO>>> GetTasksOfListAsync(TaskFilterRequestDTO model, int timeZone)
+    {
+        ArgumentNullException.ThrowIfNull(model);
+
+        var filter = model.Adapt<TaskFilter>();
+
+        var tasks = await _repository.GetTasksOfListAsync(filter);
+
+        if (tasks == null || !tasks.Any())
+        {
+            return ServiceResponse<IEnumerable<TaskResponseDTO>>.Failure(ErrorMessages.OperationHasFailed);
+        }
+
+        var response = tasks.Select(x => new TaskResponseDTO()
+        {
+            Id = x.Id,
+            Title = x.Title,
+            Description = x.Description,
+            Deadline = x.Deadline.ToOffset(new TimeSpan(timeZone, 0, 0))
+        });
+
+        return ServiceResponse<IEnumerable<TaskResponseDTO>>.Success(response);
+    }
 }

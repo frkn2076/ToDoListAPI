@@ -29,4 +29,6 @@ public interface IRepository
     Task<bool> UpdateUserTimeZoneAsync(int timeZone, int profileId, IDbTransaction transaction = null);
 
     Task<IEnumerable<ListEntity>> GetListsOfUserAsync(ListPaginationFilter filter, IDbTransaction transaction = null);
+
+    Task<IEnumerable<TaskEntity>> GetTasksOfListAsync(TaskFilter filter, IDbTransaction transaction = null);
 }

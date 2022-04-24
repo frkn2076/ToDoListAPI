@@ -79,6 +79,11 @@ public class Repository : IRepository
         return await PostgresConnection.QueryAsync<ListEntity>(GetQuery(Queries.GetListsByFilterQuery), filter, transaction: transaction);
     }
 
+    public async Task<IEnumerable<TaskEntity>> GetTasksOfListAsync(TaskFilter filter, IDbTransaction transaction = null)
+    {
+        return await PostgresConnection.QueryAsync<TaskEntity>(GetQuery(Queries.GetTasksByFilterQuery), filter, transaction: transaction);
+    }
+
     #region Helper
 
     private string GetQuery(string queryFileName)

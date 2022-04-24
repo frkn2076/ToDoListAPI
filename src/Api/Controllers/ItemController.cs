@@ -98,7 +98,7 @@ public class ItemController : ExtendedControllerBase
     }
 
     [HttpPost("list/all")]
-    public async Task<IActionResult> GetListsOfUserByPagination(ListPaginationFilterRequestModel request)
+    public async Task<IActionResult> GetListsOfUserByPaginationAsync(ListPaginationFilterRequestModel request)
     {
         int skip = 0;
 
@@ -120,4 +120,11 @@ public class ItemController : ExtendedControllerBase
         return HandleServiceResponse(response);
     }
 
+    [HttpPost("task/all")]
+    public async Task<IActionResult> GetTasksOfListAsync(TaskFilterRequestModel request)
+    {
+        var requestDTO = request.Adapt<TaskFilterRequestDTO>();
+        var response = await _itemService.GetTasksOfListAsync(requestDTO, _currentUser.TimeZone);
+        return HandleServiceResponse(response);
+    }
 }

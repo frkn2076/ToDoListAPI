@@ -26,6 +26,9 @@
 	  <None Update="Sql\Adhoc\DeleteListQuery.sql">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="Sql\Adhoc\GetTasksByFilterQuery.sql">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	  <None Update="Sql\Adhoc\UpdateUserTimeZoneQuery.sql">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>

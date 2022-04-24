@@ -10,6 +10,10 @@ public static class Queries
 
     #region Queries
 
+    public static string GetProfileByUserNameQuery = nameof(GetProfileByUserNameQuery);
+
+    public static string CreateProfileQuery = nameof(CreateProfileQuery);
+
     public static string CreateListQuery = nameof(CreateListQuery);
 
     public static string UpdateListQuery = nameof(UpdateListQuery);
@@ -26,11 +30,9 @@ public static class Queries
 
     public static string DeleteTaskQuery = nameof(DeleteTaskQuery);
 
-    public static string CreateProfileQuery = nameof(CreateProfileQuery);
-
     public static string GetListsByFilterQuery = nameof(GetListsByFilterQuery);
 
-    public static string GetProfileByUserNameQuery = nameof(GetProfileByUserNameQuery);
+    public static string GetTasksByFilterQuery = nameof(GetTasksByFilterQuery);
 
     #endregion Queries
 }
