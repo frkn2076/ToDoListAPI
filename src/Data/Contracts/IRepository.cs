@@ -32,7 +32,7 @@ public interface IRepository
 
     Task<IEnumerable<TaskEntity>> GetTasksOfListAsync(TaskFilter filter, IDbTransaction transaction = null);
 
-    Task<int> GetTimeZoneByIdAsync(int profileId, IDbTransaction transaction = null);
+    Task<int?> GetTimeZoneByIdAsync(int profileId, IDbTransaction transaction = null);
 
     Task<bool> GetAnyListExistsAsync(IDbTransaction transaction = null);
 

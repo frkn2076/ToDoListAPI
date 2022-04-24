@@ -149,7 +149,7 @@ public class ItemService : IItemService
             return ServiceResponse<IEnumerable<ListResponseDTO>>.Failure(ErrorMessages.NoRecordHasFound);
         }
 
-        var timeZone = await _repository.GetTimeZoneByIdAsync(profileId);
+        var timeZone = await _repository.GetTimeZoneByIdAsync(profileId) ?? 0;
 
         var response = lists.Select(x => new ListResponseDTO()
         {
@@ -175,7 +175,7 @@ public class ItemService : IItemService
             return ServiceResponse<IEnumerable<TaskResponseDTO>>.Failure(ErrorMessages.NoRecordHasFound);
         }
 
-        var timeZone = await _repository.GetTimeZoneByIdAsync(profileId);
+        var timeZone = await _repository.GetTimeZoneByIdAsync(profileId) ?? 0;
 
         var response = tasks.Select(x => new TaskResponseDTO()
         {
