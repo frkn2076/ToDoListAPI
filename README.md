@@ -1,13 +1,14 @@
 # ToDoList API
 
-* An app that provides todolist APIs.
+* An app that provides todolist APIs. You can visit below to use postman collection to call apis and see sample of calls.
+https://github.com/frkn2076/ToDoListAPI/blob/develop/ToDoListAPI.postman_collection.json
 
 <br>
 
 ## Features
 * ### Authentication
-  | Service                     | Method        | Endpoint                  | Description                     |
-  | --------------------------- |:-------------:| ------------------------- | --------------------------------|
+  | Service                     | Method        | Endpoint                  |
+  | --------------------------- |:-------------:| ------------------------- |
   | Register                    | POST          | authentication/register   |
   | Login                       | POST          | authentication/login      |
 * ### Item
@@ -41,3 +42,6 @@
  * Docker
  * Fluent Validation
  * Mapster
+
+## PS
+ * Set isrefresh parameter of Filter Lists By Pagination as **true** when you change your filter model or when you start pagination again.
