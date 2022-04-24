@@ -33,7 +33,7 @@ is being sent at midnight according to the time zone the user has selected.
 <br>
 
 ## Note
- * Please set system email credentials on appsettings.json to decide system email that sends emails to users. 
+ * Please set system email credentials on appsettings.json to decide system email address that sends emails to users. 
  * You need to set isrefresh parameter of **Filter Lists By Pagination** as **true** when you change your filter model or when you start pagination again.
  
 <br>
