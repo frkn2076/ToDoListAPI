@@ -25,7 +25,7 @@ public class AuthenticationService : IAuthenticationService
         _jwtSettings = jwtSettings.Value;
     }
 
-    public async Task<ServiceResponse<AuthenticationResponseDTO>> Register(AuthenticationRequestDTO model)
+    public async Task<ServiceResponse<AuthenticationResponseDTO>> RegisterAsync(AuthenticationRequestDTO model)
     {
         ArgumentNullException.ThrowIfNull(model);
 
@@ -54,7 +54,7 @@ public class AuthenticationService : IAuthenticationService
         return await GenerateTokenAsync(createdProfile);
     }
 
-    public async Task<ServiceResponse<AuthenticationResponseDTO>> Login(AuthenticationRequestDTO model)
+    public async Task<ServiceResponse<AuthenticationResponseDTO>> LoginAsync(AuthenticationRequestDTO model)
     {
         ArgumentNullException.ThrowIfNull(model);
 

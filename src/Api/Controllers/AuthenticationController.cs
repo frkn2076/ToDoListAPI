@@ -28,7 +28,7 @@ public class AuthenticationController : ExtendedControllerBase
     public async Task<IActionResult> RegisterAsync(RegisterRequestModel request)
     {
         var requestDTO = request.Adapt<AuthenticationRequestDTO>();
-        var response = await _authenticationService.Register(requestDTO);
+        var response = await _authenticationService.RegisterAsync(requestDTO);
         return HandleServiceResponse(response);
     }
 
@@ -36,7 +36,7 @@ public class AuthenticationController : ExtendedControllerBase
     public async Task<IActionResult> LoginAsync(RegisterRequestModel request)
     {
         var requestDTO = request.Adapt<AuthenticationRequestDTO>();
-        var response = await _authenticationService.Login(requestDTO);
+        var response = await _authenticationService.LoginAsync(requestDTO);
         return HandleServiceResponse(response);
     }
 }

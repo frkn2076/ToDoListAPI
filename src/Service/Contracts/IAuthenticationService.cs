@@ -6,7 +6,7 @@ namespace Service.Contracts;
 
 public interface IAuthenticationService
 {
-    Task<ServiceResponse<AuthenticationResponseDTO>> Register(AuthenticationRequestDTO model);
+    Task<ServiceResponse<AuthenticationResponseDTO>> RegisterAsync(AuthenticationRequestDTO model);
 
-    Task<ServiceResponse<AuthenticationResponseDTO>> Login(AuthenticationRequestDTO model);
+    Task<ServiceResponse<AuthenticationResponseDTO>> LoginAsync(AuthenticationRequestDTO model);
 }
