@@ -105,7 +105,7 @@ public class AuthenticationTests
     }
 
     [Test]
-    public async Task RegisterAsync_Returns_Success_If_Profile_Is_Being_Created_Successfully()
+    public async Task RegisterAsync_Returns_Success_If_Profile_Created_Successfully()
     {
         var builder = AuthenticationBuilder.Create();
         builder.SetupJWTSettings();
