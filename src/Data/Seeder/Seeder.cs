@@ -53,8 +53,7 @@ public class Seeder
         }
         catch (Exception ex)
         {
-
-            throw new Exception("Seeder has failed", ex);
+            throw new Exception($"Seeder has failed, error: {ex.Message}");
         }
     }
 
