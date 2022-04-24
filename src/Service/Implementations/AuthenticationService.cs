@@ -25,7 +25,7 @@ public class AuthenticationService : IAuthenticationService
         _jwtSettings = jwtSettings.Value;
     }
 
-    public async Task<ServiceResponse<AuthenticationResponseModel>> Register(AuthenticationRequestDTO model)
+    public async Task<ServiceResponse<AuthenticationResponseDTO>> Register(AuthenticationRequestDTO model)
     {
         ArgumentNullException.ThrowIfNull(model);
 
@@ -41,26 +41,20 @@ public class AuthenticationService : IAuthenticationService
 
         if (existingProfile != null)
         {
-            return new()
-            {
-                Error = ErrorMessages.UserAlreadyExists
-            };
+            return ServiceResponse<AuthenticationResponseDTO>.Failure(ErrorMessages.UserAlreadyExists);
         }
 
         var createdProfile = await _repository.CreateProfileAsync(profile);
 
         if (createdProfile == null)
         {
-            return new()
-            {
-                Error = ErrorMessages.OperationHasFailed
-            };
+            return ServiceResponse<AuthenticationResponseDTO>.Failure(ErrorMessages.OperationHasFailed);
         }
 
         return await GenerateTokenAsync(createdProfile);
     }
 
-    public async Task<ServiceResponse<AuthenticationResponseModel>> Login(AuthenticationRequestDTO model)
+    public async Task<ServiceResponse<AuthenticationResponseDTO>> Login(AuthenticationRequestDTO model)
     {
         ArgumentNullException.ThrowIfNull(nameof(model));
 
@@ -68,10 +62,7 @@ public class AuthenticationService : IAuthenticationService
 
         if (profile == null)
         {
-            return new()
-            {
-                Error = ErrorMessages.UserNotFound
-            };
+            return ServiceResponse<AuthenticationResponseDTO>.Failure(ErrorMessages.UserNotFound);
         }
 
         string passwordHash = BCrypt.Net.BCrypt.HashPassword(model.Password);
@@ -80,10 +71,7 @@ public class AuthenticationService : IAuthenticationService
 
         if (!isVerified)
         {
-            return new()
-            {
-                Error = ErrorMessages.WrongPassword
-            };
+            return ServiceResponse<AuthenticationResponseDTO>.Failure(ErrorMessages.WrongPassword);
         }
 
         return await GenerateTokenAsync(profile);
@@ -91,17 +79,17 @@ public class AuthenticationService : IAuthenticationService
 
     #region Helper
 
-    private async Task<ServiceResponse<AuthenticationResponseModel>> GenerateTokenAsync(ProfileEntity user)
+    private async Task<ServiceResponse<AuthenticationResponseDTO>> GenerateTokenAsync(ProfileEntity user)
     {
         var token = GenerateJwtToken(user);
 
-        var response = new AuthenticationResponseModel()
+        var response = new AuthenticationResponseDTO()
         {
             AccessToken = token,
             AccessTokenExpireDate = _jwtSettings.AccessExpireDate,
         };
 
-        return ServiceResponse<AuthenticationResponseModel>.Success(response);
+        return ServiceResponse<AuthenticationResponseDTO>.Success(response);
     }
 
     private string GenerateJwtToken(ProfileEntity user)
@@ -126,6 +114,7 @@ public class AuthenticationService : IAuthenticationService
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
         };
         var token = tokenHandler.CreateToken(tokenDescriptor);
+
         return tokenHandler.WriteToken(token);
     }
 

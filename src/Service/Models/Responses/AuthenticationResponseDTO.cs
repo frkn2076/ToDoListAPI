@@ -1,6 +1,6 @@
 ﻿namespace Service.Models.Responses;
 
-public class AuthenticationResponseModel
+public class AuthenticationResponseDTO
 {
     public string AccessToken { get; set; }
 

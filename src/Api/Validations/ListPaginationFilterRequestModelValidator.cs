@@ -7,7 +7,7 @@ public class ListPaginationFilterRequestModelValidator : AbstractValidator<ListP
 {
     public ListPaginationFilterRequestModelValidator()
     {
-        RuleFor(x => x).Must(x => x.DateMin < x.DateMax);
+        RuleFor(x => x).Must(x => x.DateMin < x.DateMax).WithMessage("Datemin must be less than datemax");
         RuleFor(x => x.Title).MaximumLength(20);
     }
 }

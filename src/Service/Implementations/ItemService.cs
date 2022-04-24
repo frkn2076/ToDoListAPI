@@ -146,7 +146,7 @@ public class ItemService : IItemService
 
         if (lists == null || !lists.Any())
         {
-            return ServiceResponse<IEnumerable<ListResponseDTO>>.Failure(ErrorMessages.OperationHasFailed);
+            return ServiceResponse<IEnumerable<ListResponseDTO>>.Failure(ErrorMessages.NoRecordHasFound);
         }
 
         var response = lists.Select(x => new ListResponseDTO()
@@ -170,7 +170,7 @@ public class ItemService : IItemService
 
         if (tasks == null || !tasks.Any())
         {
-            return ServiceResponse<IEnumerable<TaskResponseDTO>>.Failure(ErrorMessages.OperationHasFailed);
+            return ServiceResponse<IEnumerable<TaskResponseDTO>>.Failure(ErrorMessages.NoRecordHasFound);
         }
 
         var response = tasks.Select(x => new TaskResponseDTO()
