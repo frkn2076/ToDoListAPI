@@ -1,13 +1,13 @@
 ﻿INSERT INTO public.task
 	      ( title
 		  , description
-		  , dateline
+		  , deadline
 		  , isdone
 		  , listid )
 	 VALUES 
 	      ( @title
 		  , @description
-		  , @dateLine
+		  , @deadLine
 		  , @isDone
 		  , @listId )
   RETURNING *

@@ -8,7 +8,7 @@ public class TaskRequestDTO
 
     public string Description { get; set; }
 
-    public DateTimeOffset Dateline { get; set; }
+    public DateTimeOffset Deadline { get; set; }
 
     public bool IsDone { get; set; }
 

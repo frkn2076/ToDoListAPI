@@ -1,7 +1,7 @@
 ﻿UPDATE public.task
    SET title = @title
 	 , description = @description
-     , dateline = @dateLine
+     , deadline = @deadLine
 	 , isdone = @isDone
 	 , listid = @listId
  WHERE id = @id
