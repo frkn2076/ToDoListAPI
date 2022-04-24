@@ -39,4 +39,6 @@ public interface IRepository
     Task<bool> GetAnyProfileExistsAsync(IDbTransaction transaction = null);
 
     Task<bool> GetAnyTaskExistsAsync(IDbTransaction transaction = null);
+
+    Task<IEnumerable<CompletedTaskModel>> GetCompletedTasksQueryAsync(IDbTransaction transaction = null);
 }

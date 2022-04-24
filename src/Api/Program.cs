@@ -2,10 +2,12 @@ using Api;
 using Api.Mapper;
 using Api.Models.Responses;
 using Microsoft.AspNetCore.Diagnostics;
+using Api.Job;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.ConfigureServices();
+await builder.ConfigureServices();
 
 var app = builder.Build();
 
@@ -32,6 +34,10 @@ app.Map("/error", (HttpContext context) =>
 });
 
 ApiModuleMapper.Init();
+
+app.UseHangfireServer();
+
+await app.InitJobsAsync();
 
 app.UseHttpsRedirection();
 

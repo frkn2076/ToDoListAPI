@@ -104,6 +104,11 @@ public class Repository : IRepository
         return await PostgresConnection.QueryFirstOrDefaultAsync<bool>(GetQuery(Queries.GetAnyTaskExistsQuery), transaction: transaction);
     }
 
+    public async Task<IEnumerable<CompletedTaskModel>> GetCompletedTasksQueryAsync(IDbTransaction transaction = null)
+    {
+        return await PostgresConnection.QueryAsync<CompletedTaskModel>(GetQuery(Queries.GetCompletedTasksQuery), transaction: transaction);
+    }
+
     #region Helper
 
     private string GetQuery(string queryFileName)

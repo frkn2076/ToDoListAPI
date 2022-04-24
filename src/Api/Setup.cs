@@ -16,12 +16,15 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using Data.Seeder;
+using Hangfire;
+using Hangfire.MemoryStorage;
+using Api.Utils.Models;
 
 namespace Api;
 
 public static class Setup
 {
-    public static async void ConfigureServices(this WebApplicationBuilder builder)
+    public static async Task ConfigureServices(this WebApplicationBuilder builder)
     {
         var services = builder.Services;
 
@@ -59,8 +62,14 @@ public static class Setup
 
         services.AddDistributedMemoryCache();
 
+        services.AddHangfire(config =>
+        {
+            config.UseMemoryStorage();
+        });
+
         services.Configure<ConnectionStrings>(builder.Configuration.GetSection(nameof(ConnectionStrings)));
         services.Configure<JWTSettings>(builder.Configuration.GetSection(nameof(JWTSettings)));
+        services.Configure<NotificationSettings>(builder.Configuration.GetSection(nameof(NotificationSettings)));
 
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 

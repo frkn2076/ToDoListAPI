@@ -42,5 +42,7 @@ public static class Queries
 
     public static string GetAnyTaskExistsQuery = nameof(GetAnyTaskExistsQuery);
 
+    public static string GetCompletedTasksQuery = nameof(GetCompletedTasksQuery);
+
     #endregion Queries
 }
