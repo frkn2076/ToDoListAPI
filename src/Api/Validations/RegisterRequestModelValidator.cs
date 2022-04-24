@@ -7,7 +7,7 @@ public class RegisterRequestModelValidator : AbstractValidator<RegisterRequestMo
 {
     public RegisterRequestModelValidator()
     {
-        RuleFor(x => x.UserName).NotEmpty().Length(4, 20);
+        RuleFor(x => x.UserName).NotEmpty().Length(4, 40);
         RuleFor(x => x.Password).NotEmpty().Length(4, 20);
     }
 }
