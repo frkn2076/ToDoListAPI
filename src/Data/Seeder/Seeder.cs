@@ -74,8 +74,8 @@ public class Seeder
 
     private List<ProfileEntity> GetProfileSeeder()
     {
-        var user1 = BuildCryptedProfileEntity("furkan", "12345");
-        var user2 = BuildCryptedProfileEntity("test2", "password2");
+        var user1 = BuildCryptedProfileEntity("ozturkfurkan1994@gmail.com", "12345");
+        var user2 = BuildCryptedProfileEntity("testuser@hotmail.com", "password");
 
         return new() { user1, user2 };
     }
@@ -125,7 +125,7 @@ public class Seeder
             Title = "title1",
             Description = "desc1",
             Deadline = DateTime.Now.AddDays(1),
-            IsDone = true,
+            IsDone = false,
             ListId = 1
         };
 
@@ -143,7 +143,7 @@ public class Seeder
             Title = "title1",
             Description = "desc1",
             Deadline = DateTime.Now,
-            IsDone = true,
+            IsDone = false,
             ListId = 2
         };
 
