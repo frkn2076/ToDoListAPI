@@ -1,0 +1,580 @@
+{
+  "info": {
+    "_postman_id": "329c1b35-3178-4755-9183-19596f93b239",
+    "name": "ToDoListAPI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "authentication - test",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/authentication/test",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "authentication",
+            "test"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "item - test",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/item/test",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "item",
+            "test"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"furkann\",\r\n    \"password\": \"12345\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/authentication/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "authentication",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"furkan\",\r\n    \"password\": \"12345\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/authentication/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "authentication",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create List",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZXJ0c2VyaWFsbnVtYmVyIjoiMSIsIm5hbWVpZCI6ImZ1cmthbiIsIm5iZiI6MTY1MDgxNzc1NiwiZXhwIjoxNjUwODIxMzU2LCJpYXQiOjE2NTA4MTc3NTZ9.iy1YCoHOMJAHNtkddHDrW2sfp4tre9Ohm9SC2Q4eV8U",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{{{jwt_token}}}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"title1\",\r\n    \"description\": \"desc1\",\r\n    \"date\": \"2023-03-04T18:00:00\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/item/list",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "item",
+            "list"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Filter Lists",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZXJ0c2VyaWFsbnVtYmVyIjoiMSIsIm5hbWVpZCI6ImZ1cmthbiIsIm5iZiI6MTY1MDgxNzc1NiwiZXhwIjoxNjUwODIxMzU2LCJpYXQiOjE2NTA4MTc3NTZ9.iy1YCoHOMJAHNtkddHDrW2sfp4tre9Ohm9SC2Q4eV8U",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{{{jwt_token}}}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"title1\",\r\n    \"datemin\": \"2021-05-05T18:00:00+05:00\",\r\n    \"datemax\": \"2024-05-05T18:00:00+05:00\",\r\n    \"isrefresh\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/item/list/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "item",
+            "list",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Task",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZXJ0c2VyaWFsbnVtYmVyIjoiMSIsIm5hbWVpZCI6ImZ1cmthbiIsIm5iZiI6MTY1MDgxNzc1NiwiZXhwIjoxNjUwODIxMzU2LCJpYXQiOjE2NTA4MTc3NTZ9.iy1YCoHOMJAHNtkddHDrW2sfp4tre9Ohm9SC2Q4eV8U",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{{{jwt_token}}}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"title1\",\r\n    \"description\": \"desc1\",\r\n    \"deadline\": \"2023-05-05T18:00:00+05:00\",\r\n    \"isdone\": true,\r\n    \"listid\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/item/task",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "item",
+            "task"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Filter Tasks",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZXJ0c2VyaWFsbnVtYmVyIjoiMSIsIm5hbWVpZCI6ImZ1cmthbiIsIm5iZiI6MTY1MDgxNzc1NiwiZXhwIjoxNjUwODIxMzU2LCJpYXQiOjE2NTA4MTc3NTZ9.iy1YCoHOMJAHNtkddHDrW2sfp4tre9Ohm9SC2Q4eV8U",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{{{jwt_token}}}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"listid\": \"1\",\r\n    \"deadlinemin\": \"2021-05-05T18:00:00+05:00\",\r\n    \"deadlinemax\": \"2024-05-05T18:00:00+05:00\",\r\n    \"isdone\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/item/task/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "item",
+            "task",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update List",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZXJ0c2VyaWFsbnVtYmVyIjoiMSIsIm5hbWVpZCI6ImZ1cmthbiIsIm5iZiI6MTY1MDgxNzc1NiwiZXhwIjoxNjUwODIxMzU2LCJpYXQiOjE2NTA4MTc3NTZ9.iy1YCoHOMJAHNtkddHDrW2sfp4tre9Ohm9SC2Q4eV8U",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{{{jwt_token}}}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"updated2\",\r\n    \"description\": \"updated2\",\r\n    \"date\": \"2024-01-05T18:00:00+05:00\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/item/list/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "item",
+            "list",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Task",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZXJ0c2VyaWFsbnVtYmVyIjoiMSIsIm5hbWVpZCI6ImZ1cmthbiIsIm5iZiI6MTY1MDgxNzc1NiwiZXhwIjoxNjUwODIxMzU2LCJpYXQiOjE2NTA4MTc3NTZ9.iy1YCoHOMJAHNtkddHDrW2sfp4tre9Ohm9SC2Q4eV8U",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{{{jwt_token}}}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"title\": \"title2\",\r\n    \"description\": \"desc2\",\r\n    \"deadline\": \"2023-05-05T18:00:00+05:00\",\r\n    \"isdone\": true,\r\n    \"listid\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/item/task/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "item",
+            "task",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Task Status",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZXJ0c2VyaWFsbnVtYmVyIjoiMSIsIm5hbWVpZCI6ImZ1cmthbiIsIm5iZiI6MTY1MDgxNzc1NiwiZXhwIjoxNjUwODIxMzU2LCJpYXQiOjE2NTA4MTc3NTZ9.iy1YCoHOMJAHNtkddHDrW2sfp4tre9Ohm9SC2Q4eV8U",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{{{jwt_token}}}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"isdone\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/item/task/status/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "item",
+            "task",
+            "status",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update User TimeZone",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZXJ0c2VyaWFsbnVtYmVyIjoiMSIsIm5hbWVpZCI6ImZ1cmthbiIsIm5iZiI6MTY1MDgxNzc1NiwiZXhwIjoxNjUwODIxMzU2LCJpYXQiOjE2NTA4MTc3NTZ9.iy1YCoHOMJAHNtkddHDrW2sfp4tre9Ohm9SC2Q4eV8U",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{{{jwt_token}}}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"timezone\": 5\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/item/user/timezone",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "item",
+            "user",
+            "timezone"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete List",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZXJ0c2VyaWFsbnVtYmVyIjoiMSIsIm5hbWVpZCI6ImZ1cmthbiIsIm5iZiI6MTY1MDgxNzc1NiwiZXhwIjoxNjUwODIxMzU2LCJpYXQiOjE2NTA4MTc3NTZ9.iy1YCoHOMJAHNtkddHDrW2sfp4tre9Ohm9SC2Q4eV8U",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{{{jwt_token}}}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/item/list/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "item",
+            "list",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Task",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjZXJ0c2VyaWFsbnVtYmVyIjoiMSIsIm5hbWVpZCI6ImZ1cmthbiIsIm5iZiI6MTY1MDgxNzc1NiwiZXhwIjoxNjUwODIxMzU2LCJpYXQiOjE2NTA4MTc3NTZ9.iy1YCoHOMJAHNtkddHDrW2sfp4tre9Ohm9SC2Q4eV8U",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{{{jwt_token}}}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/item/task/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "item",
+            "task",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
