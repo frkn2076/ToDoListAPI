@@ -17,4 +17,6 @@ public interface IItemService
     Task<ServiceResponse> UpdateTaskAsync(TaskRequestDTO model);
 
     Task<ServiceResponse> DeleteTaskAsync(int id);
+
+    Task<ServiceResponse> UpdateTaskStatusAsync(bool isDone, int id);
 }

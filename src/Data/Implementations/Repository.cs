@@ -61,6 +61,12 @@ public class Repository : IRepository
         return affectedRows > 0;
     }
 
+    public async Task<bool> UpdateTaskStatusAsync(bool isDone, int id, IDbTransaction transaction = null)
+    {
+        var affectedRows = await PostgresConnection.ExecuteAsync(GetQuery(Queries.UpdateTaskStatusQuery), new { isDone, id }, transaction: transaction);
+        return affectedRows > 0;
+    }
+
     #region Helper
 
     private string GetQuery(string queryFileName)

@@ -129,4 +129,16 @@ public class ItemService : IItemService
 
         return ServiceResponse.Success();
     }
+
+    public async Task<ServiceResponse> UpdateTaskStatusAsync(bool isDone, int id)
+    {
+        var isSuccessful = await _repository.UpdateTaskStatusAsync(isDone, id);
+
+        if (!isSuccessful)
+        {
+            return ServiceResponse.Failure(ErrorMessages.OperationHasFailed);
+        }
+
+        return ServiceResponse.Success();
+    }
 }

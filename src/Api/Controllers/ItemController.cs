@@ -99,4 +99,11 @@ public class ItemController : ExtendedControllerBase
         var response = await _itemService.DeleteTaskAsync(id);
         return HandleServiceResponse(response);
     }
+
+    [HttpPut("task/status/{id}")]
+    public async Task<IActionResult> UpdateTaskStatus(TaskStatusRequestModel request, int id)
+    {
+        var response = await _itemService.UpdateTaskStatusAsync(request.IsDone, id);
+        return HandleServiceResponse(response);
+    }
 }

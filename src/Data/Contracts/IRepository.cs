@@ -20,4 +20,6 @@ public interface IRepository
     Task<bool> UpdateTaskAsync(TaskEntity task, IDbTransaction transaction = null);
 
     Task<bool> DeleteTaskAsync(int id, IDbTransaction transaction = null);
+
+    Task<bool> UpdateTaskStatusAsync(bool isDone, int id, IDbTransaction transaction = null);
 }
