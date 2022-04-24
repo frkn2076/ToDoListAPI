@@ -6,6 +6,9 @@ https://github.com/frkn2076/ToDoListAPI/blob/develop/ToDoListAPI.postman_collect
 * System sends users an email notification about how many tasks they’ve completed that day. The email
 is being sent at midnight according to the time zone the user has selected.
 
+# Run Project
+* **docker-compose up**
+
 <br>
 
 ## Features
