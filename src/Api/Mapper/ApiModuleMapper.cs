@@ -21,6 +21,8 @@ public class ApiModuleMapper
 
         TypeAdapterConfig<ListPaginationFilterRequestModel, ListPaginationFilterRequestDTO>.NewConfig();
 
+        TypeAdapterConfig<TaskFilterRequestModel, TaskFilterRequestDTO>.NewConfig();
+
         #endregion
 
         #region DTO To Entity
@@ -30,6 +32,8 @@ public class ApiModuleMapper
         TypeAdapterConfig<TaskRequestDTO, TaskEntity>.NewConfig();
 
         TypeAdapterConfig<ListPaginationFilterRequestDTO, ListPaginationFilter>.NewConfig();
+
+        TypeAdapterConfig<TaskFilterRequestDTO, TaskFilter>.NewConfig();
 
         #endregion
 
