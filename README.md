@@ -9,6 +9,9 @@ is being sent at midnight according to the time zone the user has selected.
 # Run Project
 * **docker-compose up**
 
+# Run Unit Tests
+* **dotnet test**
+
 <br>
 
 ## Features
